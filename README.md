@@ -12,3 +12,7 @@ Example usage:
     $ python -m pgo_task
     $ perf record python -X perf -m pgo_task -r 4
     $ perf report
+
+You can run a subset of the scripts by listing their names as arguments:
+
+    $ python -m pgo_task bm_chaos bm_go
