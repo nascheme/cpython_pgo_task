@@ -1,0 +1,17 @@
+[project]
+name = "pgo-task"
+version = "0.1.0"
+description = "Collections of programs to run as PGO task."
+readme = "README.md"
+authors = [
+    { name = "Neil Schemenauer", email = "nas@arctrix.com" }
+]
+requires-python = ">=3.13"
+dependencies = []
+
+[project.scripts]
+pgo-task = "pgo_task:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
