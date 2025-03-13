@@ -4,6 +4,22 @@ import importlib
 import os
 import time
 import argparse
+import dataclasses
+
+
+@dataclasses.dataclass
+class Task:
+    name: str
+    filename: str
+
+
+def find_tasks():
+    tasks = {}
+    package_dir = os.path.dirname(__file__)
+    for fn in glob.glob(os.path.join(package_dir, 'bm_*.py')):
+        name, ext = os.path.splitext(os.path.basename(fn))
+        tasks[name] = Task(name=name, filename=fn)
+    return tasks
 
 
 def main():
@@ -18,19 +34,18 @@ def main():
     parser.add_argument('tasks', nargs='*', help='Name of tasks to run.')
     args = parser.parse_args()
     cmdline_tasks = set(args.tasks)
-    tasks = []
-    package_dir = os.path.dirname(__file__)
-    for fn in glob.glob(os.path.join(package_dir, 'bm_*.py')):
-        tasks.append(fn)
     total_time = 0
+    tasks = find_tasks()
+    if cmdline_tasks:
+        tasks_to_run = cmdline_tasks
+    else:
+        tasks_to_run = sorted(tasks)
     print('Running PGO tasks...')
-    for fn in sorted(tasks):
-        name, ext = os.path.splitext(os.path.basename(fn))
-        if cmdline_tasks and name not in cmdline_tasks:
-            continue
-        module = importlib.import_module(f'test.pgo_task.{name}')
+    for name in tasks_to_run:
+        task = tasks[name]
+        module = importlib.import_module(f'pgo_task.{name}')
         if not hasattr(module, 'run_pgo'):
-            print('task module missing run_pgo()', fn)
+            print('task module missing run_pgo()', task.filename)
             continue
         t0 = time.perf_counter()
         print(f'{name:>40}', end='', flush=True)
