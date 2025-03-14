@@ -626,6 +626,8 @@ def delta_blue(n):
     projection_test(n)
 
 
+THREAD_SAFE = False
+
 def run_pgo():
     n = 5000
     delta_blue(n)

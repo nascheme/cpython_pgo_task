@@ -109,6 +109,8 @@ BENCHMARKS = {
 }
 
 
+THREAD_SAFE = False
+
 def run_pgo():
 
     # NOTE: StringIO performance will impact the results...

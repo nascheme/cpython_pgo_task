@@ -419,6 +419,8 @@ class Richards:
         return True
 
 
+THREAD_SAFE = False
+
 def run_pgo():
     richard = Richards()
     richard.run(10)

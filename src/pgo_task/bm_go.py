@@ -449,6 +449,8 @@ def versus_cpu():
     return computer_move(board)
 
 
+THREAD_SAFE = False
+
 def run_pgo():
     for _ in range(5):
         versus_cpu()

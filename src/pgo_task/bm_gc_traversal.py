@@ -26,5 +26,7 @@ def benchamark_collection(loops, n_levels):
 
 
 
+THREAD_SAFE = False
+
 def run_pgo():
     benchamark_collection(10, N_LEVELS)

@@ -55,5 +55,7 @@ def benchamark_collection(loops, cycles, links):
     return total_time
 
 
+THREAD_SAFE = False
+
 def run_pgo():
     benchamark_collection(10, CYCLES, LINKS)

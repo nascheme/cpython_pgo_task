@@ -231,6 +231,8 @@ def bench_all(pickle):
         benchmark(inner_loops, pickle, options)
 
 
+THREAD_SAFE = False
+
 def run_pgo():
     from test.support import import_helper
 
